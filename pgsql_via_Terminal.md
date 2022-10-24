@@ -130,10 +130,25 @@ psql -p 5432 -d NOMEBANCO -U postgres -c "\copy (SELECT * FROM TABELA) to '/opt/
 vacuumdb -h 127.0.0.1 -p 5432 -U postgres -w -d NOMEBANCO -v -f -z
 ```
 
+#### Via vacuumdb, VACUUM e "posteriormente", ANALYZE em BANCO/TABELA determinada:
+
+```bash
+vacuumdb -h 127.0.0.1 -p 5432 -U postgres -w -d NOMEBANCO -v -f -t public.TABELA
+vacuumdb -h 127.0.0.1 -p 5432 -U postgres -w -d NOMEBANCO -v -Z -t public.TABELA
+```
+### Via vacuumdb, VACUUM "E" ANALYZE em tabela determinada:
+
+```bash
+vacuumdb -h 127.0.0.1 -p 5432 -U postgres -w -d NOMEBANCO -v -f -Z -t public.TABELA
+```
+
 ### Via reindexdb, REINDEX em BANCO determinado, completo:
 
 ```bash
-echo -e "REINDEXANDO BANCO...\n" && sleep 5
 reindexdb -h 127.0.0.1 -p 5432 -U postgres -w -d NOMEBANCO -v
-echo -e "REINDEX TERMINADO\n"
+```
+### Via reindexdb, REINDEX em BANCO/TABELA determinado:
+
+```BASH
+reindexdb -h 127.0.0.1 -p 5432 -U postgres -w -d NOMEBANCO -v -t public.TABELA
 ```
