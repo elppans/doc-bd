@@ -116,8 +116,16 @@ systemctl status postgresql-12
 
 Modificar senha do usuario postgres no template  
 
+>Comando para adicionar em Scripts:
+
 ```
 sudo -u postgres psql -c "ALTER USER postgres WITH PASSWORD 'postgres'" -d template1
+```
+
+>Comando para ser executado ao fazer configuração manual:
+
+```
+psql -U postgres -c "ALTER USER postgres WITH PASSWORD 'postgres'" -d template1
 ```
 
 Criar um banco para uso, usando exemplo, com o nome do host.  
