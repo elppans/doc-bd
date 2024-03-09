@@ -95,6 +95,14 @@ export IPROUTE=$(ip route show | grep kernel | awk '{ print $1 }' | head -1)
 echo -e "\nhost all all 0.0.0.0/0 trust\n" | sudo tee -a /etc/postgresql/12/main/pg_hba.conf
 echo -e "\nhost all all "$IPROUTE" trust\n" | sudo tee -a /etc/postgresql/12/main/pg_hba.conf
 ```
+- Edição manual do pg_hba.conf:
+  
+Edite o arquivo /etc/postgresql/{VERSAO DO POSTGRES}/main/pg_hba.conf e adicione no final do arquivo o IP 0.0.0.0 e o IP do servidor para que seja liberado a comunicação do Manager com o banco:
+
+```
+host all all 0.0.0.0/0 trust
+host all all 192.168.15.90/24 trust
+```
 
 ### Alterar arquivo postgresql.conf
 
@@ -103,6 +111,16 @@ sudo sed -i '/listen_addresses/s/#//' /etc/postgresql/12/main/postgresql.conf
 sudo sed -i '/listen_addresses/s/localhost/*/' /etc/postgresql/12/main/postgresql.conf
 sudo sed -i "s/^#*\(port = \).*/\15432/" /etc/postgresql/12/main/postgresql.conf
 ```
+
+- Edição manual do arquivo postgresql.conf:  
+
+Ache a linha com `listen_addresses`, descomente e deixe desta forma:  
+
+```
+listen_addresses = '*'  
+```
+Ache a linha que tem ``port = 5432`` e se estiver comentado, descomente.  
+Depois salve e saia do editor.  
 
 Reiniciar o PostgreSQL
 
