@@ -30,6 +30,11 @@ psql  -p 5432 -U postgres -l
 ```bash
 createdb -U postgres NOMEBANCO NOMEBANCO
 ```
+### Criar banco, com Encoding `LATIN1`, Collate/CType `ISO8859-1`:  
+
+```
+createdb -U postgres -E LATIN1 --locale=pt_BR.iso88591 -T template0 NOMEBANCO
+```
 
 ### Renomear banco:
 
