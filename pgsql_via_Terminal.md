@@ -106,7 +106,15 @@ SELECT pg_size_pretty(pg_database_size('Database Name'));
 SELECT pg_size_pretty(pg_relation_size('table_name'));
 ```
 
+### Tamanho TODAS as tabelas do banco, em ordem de tamanho, do maior pro menor
 
+```bash
+SELECT table_name AS "NomeTabela",
+       pg_size_pretty(pg_total_relation_size('"' || table_name || '"')) AS "Tamanho"
+FROM information_schema.tables
+WHERE table_schema = 'public'
+ORDER BY pg_total_relation_size('"' || table_name || '"') DESC;
+```
 
 ### Exportar Select para CSV:
 
