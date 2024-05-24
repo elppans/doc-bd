@@ -65,10 +65,10 @@ Atualize os repositórios
 sudo apt update
 ```
 
-# Instalar PostgreSQL 12:
+# Instalar PostgreSQL 16:
 
 ```
-sudo apt -y install postgresql-12
+sudo apt -y install postgresql-16
 ```
 
 Verificar se a versão foi instalado corretamente e se está aceitando conexões
@@ -81,19 +81,19 @@ pg_isready
 ### Configurar banco para usar ISO-88591 (LATIN1)
 
 ```
-sudo pg_ctlcluster 12 main stop
-sudo pg_dropcluster 12 main
-sudo pg_createcluster --locale=pt_BR.iso88591 -e LATIN1 12 main
-sudo pg_ctlcluster 12 main start
+sudo pg_ctlcluster 16 main stop
+sudo pg_dropcluster 16 main
+sudo pg_createcluster --locale=pt_BR.iso88591 -e LATIN1 16 main
+sudo pg_ctlcluster 16 main start
 ```
 
 ### Alterar arquivo pg_hba.conf
 
 ```
-PGDATA="/var/lib/postgresql/12/main"
+PGDATA="/var/lib/postgresql/16/main"
 export IPROUTE=$(ip route show | grep kernel | awk '{ print $1 }' | head -1)
-echo -e "\nhost all all 0.0.0.0/0 trust\n" | sudo tee -a /etc/postgresql/12/main/pg_hba.conf
-echo -e "\nhost all all "$IPROUTE" trust\n" | sudo tee -a /etc/postgresql/12/main/pg_hba.conf
+echo -e "\nhost all all 0.0.0.0/0 trust\n" | sudo tee -a /etc/postgresql/16/main/pg_hba.conf
+echo -e "\nhost all all "$IPROUTE" trust\n" | sudo tee -a /etc/postgresql/16/main/pg_hba.conf
 ```
 - Edição manual do pg_hba.conf:
   
@@ -107,9 +107,9 @@ host all all 192.168.15.90/24 trust
 ### Alterar arquivo postgresql.conf
 
 ```
-sudo sed -i '/listen_addresses/s/#//' /etc/postgresql/12/main/postgresql.conf
-sudo sed -i '/listen_addresses/s/localhost/*/' /etc/postgresql/12/main/postgresql.conf
-sudo sed -i "s/^#*\(port = \).*/\15432/" /etc/postgresql/12/main/postgresql.conf
+sudo sed -i '/listen_addresses/s/#//' /etc/postgresql/16/main/postgresql.conf
+sudo sed -i '/listen_addresses/s/localhost/*/' /etc/postgresql/16/main/postgresql.conf
+sudo sed -i "s/^#*\(port = \).*/\15432/" /etc/postgresql/16/main/postgresql.conf
 ```
 
 - Edição manual do arquivo postgresql.conf:  
@@ -144,20 +144,20 @@ sudo -u postgres createuser -d -l -P -r -s --replication pgadmin
 Criar um banco para uso. Exemplo, com o nome do host
 
 ```
-createdb -h 127.0.0.1 -p 5432 -U pgadmin db.`hostname` db.`hostname`
+createdb -h 167.0.0.1 -p 5432 -U pgadmin db.`hostname` db.`hostname`
 ```
 
 Listar bancos
 
 ```
-psql -h 127.0.0.1 -p 5432 -U pgadmin -l
+psql -h 167.0.0.1 -p 5432 -U pgadmin -l
 ```
 
 Adicionar "Funções" no Banco
 
 ```
 wget -c https://raw.githubusercontent.com/elppans/zretail/master/function.sql
-psql -h 127.0.0.1 -p 5432 -d db.`hostname` -U pgadmin -W -f function.sql
+psql -h 167.0.0.1 -p 5432 -d db.`hostname` -U pgadmin -W -f function.sql
 ```
 
 # Liberar portas, FirewallD
