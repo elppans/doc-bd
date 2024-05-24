@@ -144,20 +144,20 @@ sudo -u postgres createuser -d -l -P -r -s --replication pgadmin
 Criar um banco para uso. Exemplo, com o nome do host
 
 ```
-createdb -h 167.0.0.1 -p 5432 -U pgadmin db.`hostname` db.`hostname`
+createdb -h127.0.0.1 -p 5432 -U pgadmin db.`hostname` db.`hostname`
 ```
 
 Listar bancos
 
 ```
-psql -h 167.0.0.1 -p 5432 -U pgadmin -l
+psql -h127.0.0.1 -p 5432 -U pgadmin -l
 ```
 
 Adicionar "Funções" no Banco
 
 ```
 wget -c https://raw.githubusercontent.com/elppans/zretail/master/function.sql
-psql -h 167.0.0.1 -p 5432 -d db.`hostname` -U pgadmin -W -f function.sql
+psql -h127.0.0.1 -p 5432 -d db.`hostname` -U pgadmin -W -f function.sql
 ```
 
 # Liberar portas, FirewallD
