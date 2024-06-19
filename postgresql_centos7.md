@@ -4,6 +4,10 @@
 
 [Baixe a versão mais recente do CentOS para a instalação](https://www.centos.org/download/#centos-stream)
 
+- Leia também:
+
+[Ciclo de Vida Estendido (ELS) para o Red Hat Enterprise Linux 7 por até 4 anos](https://www.redhat.com/pt-br/blog/announcing-4-years-extended-life-cycle-support-els-red-hat-enterprise-linux-7)
+
 ## Configurando locales:
 
  Atualmente no CentOS 7, por alguma razão, quando se configura para usar "ISO-8859-1", ao fazer initdb dá esta  mensagem constante:
