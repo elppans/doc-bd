@@ -1,4 +1,9 @@
-# PostgreSQL no CentOS 8, via módulo
+# PostgreSQL no CentOS 8, via módulo, FIM DO SUPORTE
+
+[![Fim do suporte CentOS 7 e 8](https://i.imgur.com/Zpk4dzc.png)](https://blog.centos.org/2023/04/end-dates-are-coming-for-centos-stream-8-and-centos-linux-7/)
+
+[Baixe a versão mais recente do CentOS para a instalação](https://www.centos.org/download/#centos-stream)
+
 
 ## Configurar repositórios *(OPCIONAL)*  
 
