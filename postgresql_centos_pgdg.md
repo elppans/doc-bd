@@ -9,7 +9,7 @@
 
 ## Configuração dos repositórios 
 
-Para a instalação do PostgreSQL, não é necessário adicionar o repositório **epel**.
+Para a instalação do PostgreSQL, não é necessário adicionar o repositório **epel**.  
 Independente de adicionar ou não, **atualize a Distro**.  
 Após a atualização, **se foi atualizado o Kernel, reinicie o sistema**.  
 
@@ -29,8 +29,8 @@ sudo dnf install -y https://download.postgresql.org/pub/repos/yum/reporpms/EL-9-
 ```
 
 ### Desative os repositórios PGDG das versões que não serão usadas
->Será instalado a versão 16, que é a versão estável mais alta, no momento da publicação desta matéria.
->Para instalar outra versão, acesse o site oficial [postgresql.org](https://www.postgresql.org/).
+>Será instalado a versão 16, que é a versão estável mais alta, no momento da publicação desta matéria.  
+>Para instalar outra versão, acesse o site oficial [postgresql.org](https://www.postgresql.org/).  
 
 ```
 sudo dnf -y config-manager --disable pgdg{12,13,14,15} &>> /dev/null
@@ -125,7 +125,7 @@ sudo systemctl restart postgresql-16
 
 Usando FirewallD, pode ser usado o nome do serviço ou diretamente a porta para a liberação  
 No CentOS vem instalado por padrão, mas caso não esteja instalado, instale o pacote do FirewallD.  
-> Se não for a intenção usar o FirewallD, Ignore esta sessão da matéria e finalizar por aqui.
+> Se não for a intenção usar o FirewallD, Ignore esta sessão da matéria e finalizar por aqui.  
 
 ```
 sudo yum -y install firewalld firewalld-filesystem
