@@ -114,14 +114,16 @@ host all all 192.168.15.90/24 trust
 
 2. **Autenticação MD5**:
    - Ele gera um hash de 128 bits para dados, um algoritmo de resumo de mensagem usado para autenticar mensagens e verificar conteúdo.
-   - Para usar, adicione uma linha como esta no `pg_hba.conf`:
+   - Para usar, modifique a 1º linha **"local"** trocando o usuário **`all`** para **`postgres`** e adicione no final do arquivo `pg_hba.conf` uma linha como esta*:
    
      ```
-     local   replication     pgadmin md5
+     local   all     postgres md5
+     ...
+     local   all     pgadmin md5
      ```
      
    - Isso permite que o software gere e verifique o resumo MD5 de cada segmento enviado na conexão TCP.
-   - Crie um usuário no PostgreSQL para usar este método.
+   - *Crie um usuário no PostgreSQL para usar este método.
 
 ### Alterar arquivo postgresql.conf  
 
