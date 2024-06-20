@@ -123,7 +123,11 @@ host all all 192.168.15.90/24 trust
      ```
      
    - Isso permite que o software gere e verifique o resumo MD5 de cada segmento enviado na conexão TCP.
-   - *Crie um usuário no PostgreSQL para usar este método.
+   - *Crie um usuário no PostgreSQL para usar este método e para fazer tarefas administrativas:
+
+      ```
+      sudo -u postgres createuser -d -l -P -r -s --replication pgadmin
+      ```
 
 ### Alterar arquivo postgresql.conf  
 
