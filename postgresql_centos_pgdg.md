@@ -66,7 +66,7 @@ Verificar se a versão desejada foi instalado corretamente
 psql --version
 ```
 
-### Opcionalmente, inicialize o banco de dados e habilite o início automático:
+### Inicialize o banco de dados e habilite o início automático:
 
 - Iniciar uso do banco de dados
 
@@ -94,12 +94,34 @@ sudo systemctl status postgresql-16
 
 ### Alterar arquivo pg_hba.conf  
 
+- Host PGSQL:
+  
 Edite o arquivo `/var/lib/pgsql/{VERSAO}/data/pg_hba.conf` e adicione no final do arquivo o IP `0.0.0.0` e o IP do servidor para que seja liberado a comunicação do Manager com o banco:
+
+
 
 ```
 host all all 0.0.0.0/0 trust
 host all all 192.168.15.90/24 trust
 ```
+
+- Autenticação PGSQL:
+
+1. **Autenticação Peer** (Padrão):
+   - Usado para autenticar conexões locais no PostgreSQL.
+   - No entanto, pode causar problemas, como o erro "FATAL: A autenticação do tipo peer falhou".
+   - Para resolver, modifique o arquivo para usar outro método de autenticação, como "md5".
+
+2. **Autenticação MD5**:
+   - Ele gera um hash de 128 bits para dados, um algoritmo de resumo de mensagem usado para autenticar mensagens e verificar conteúdo.
+   - Para usar, adicione uma linha como esta no `pg_hba.conf`:
+   
+     ```
+     local   replication     pgadmin md5
+     ```
+     
+   - Isso permite que o software gere e verifique o resumo MD5 de cada segmento enviado na conexão TCP.
+   - Crie um usuário no PostgreSQL para usar este método.
 
 ### Alterar arquivo postgresql.conf  
 
