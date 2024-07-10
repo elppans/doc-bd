@@ -5,7 +5,7 @@
 [![Fim do suporte CentOS 7 e 8](https://i.imgur.com/Zpk4dzc.png)](https://blog.centos.org/2023/04/end-dates-are-coming-for-centos-stream-8-and-centos-linux-7/)
 
 [**Baixe a versão mais recente do CentOS para a instalação**](https://www.centos.org/download/#centos-stream)
-> Até o momento da publicação desta matéria o mais recente é a versão 9
+>Até o momento da publicação desta matéria o mais recente é o **CentOS 9 Stream**
 
 ## Configuração dos repositórios 
 
