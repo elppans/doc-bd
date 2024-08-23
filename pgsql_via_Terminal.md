@@ -1,5 +1,11 @@
 #	Comandos pgsql via Terminal:
 
+### Select para Verificar a versão do PostgreSQL
+
+```bash
+SELECT version();
+```
+
 ### Criar um Super Usuário no Banco:
 
 ```bash
