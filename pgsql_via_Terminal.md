@@ -122,6 +122,28 @@ WHERE table_schema = 'public'
 ORDER BY pg_total_relation_size('"' || table_name || '"') DESC;
 ```
 
+### Tamanho TODAS as tabelas do banco, em ordem de tamanho, do maior pro menor, tabelas de [10+ GB](https://github.com/elppans/doc-linux/blob/main/1024_em_computacao.md)
+
+```bash
+SELECT
+  table_name,
+  pg_size_pretty(total_size) AS total_size
+FROM (
+  SELECT
+    table_name,
+    pg_total_relation_size(quote_ident(table_schema) || '.' || quote_ident(table_name)) AS total_size
+  FROM
+    information_schema.tables
+  WHERE
+    table_schema = 'public' -- Substitua pelo esquema desejado, se aplicável
+) AS table_sizes
+WHERE
+  total_size >= 10737418240 -- Tabelas de 10 GB ou mais (10 GB = 10 * 1024 * 1024 * 1024 bytes (10×2^30))
+ORDER BY 
+  total_size DESC
+;
+```
+
 ### Exportar Select para CSV:
 
 ```bash
