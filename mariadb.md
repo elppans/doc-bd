@@ -16,77 +16,117 @@ https://mariadb.com/kb/en/compiling-mariadb-from-source
 ___
 
 Instalar Servidor MariaDB versão Binário
-
+```
 cd ~/Downloads
+```
+```
 wget -c https://espejito.fder.edu.uy/mariadb///mariadb-11.8.0/bintar-linux-systemd-x86_64/mariadb-11.8.0-preview-linux-systemd-x86_64.tar.gz
-
+```
+```
 sudo groupadd mysql
+```
+```
 sudo useradd -g mysql mysql
-
+```
+```
 cd /usr/local
+```
+```
 sudo tar -xvf /home/suporte4/Downloads/mariadb-11.8.0-preview-linux-systemd-x86_64.tar.gz
+```
+```
 sudo unlink /usr/local/mysql
+```
+```
 sudo ln -s mariadb-11.7.1-linux-systemd-x86_64 mysql
-
+```
+```
 cd mysql
+```
+```
 sudo chown -R mysql .
+```
+```
 sudo chgrp -R mysql .
+```
+```
 sudo scripts/mysql_install_db --user=mysql
+```
+```
 sudo chown -R root .
+```
+```
 sudo chown -R mysql data
+```
+```
 sudo bin/mysqld_safe --user=mysql &
-
+```
+```
 ps ax | grep mysql | grep -v grep
+```
 
 ## Criar senha para o usuário mysql
 
 - Conecte-se ao MariaDB como root ou um usuário existente com permissões:
- sudo ./mysql -u root -p
- - Listar os usuários do banco:
- SELECT User, Host FROM mysql.user;
-- use o comando abaixo para definir a nova senha para um usuário específico (Exemplo):
-SET PASSWORD FOR 'mysql'@'localhost' = PASSWORD('mysql');
 
+```
+ sudo ./mysql -u root -p
+```
+ - Listar os usuários do banco:
+ ```
+ SELECT User, Host FROM mysql.user;
+```
+- use o comando abaixo para definir a nova senha para um usuário específico (Exemplo):
+```
+SET PASSWORD FOR 'mysql'@'localhost' = PASSWORD('mysql');
+```
 ## Criar um novo usuário:
 
 - Depois de conectado, crie um novo usuário (exemplo):
+```
 CREATE USER 'admin'@'localhost' IDENTIFIED BY 'admin';
+```
 - Conceda todos os privilégios ao novo usuário:
+```
 GRANT ALL PRIVILEGES ON *.* TO 'admin'@'localhost' WITH GRANT OPTION;
+```
 - Atualize os privilégios:
+```
 FLUSH PRIVILEGES;
-
+```
 ## Listar os bancos
-
+```
 SHOW DATABASES;
-
+```
 ## Criar um banco novo
-
+```
 CREATE DATABASE db_local;
-
+```
 ## Remover um banco especifico
-
+```
 DROP DATABASE nome_do_banco;
-
+```
 ## Sair do servidor MariaDB
 
 Basta digitar:
-
+```
 exit;
-
+```
 OU
-
+```
 quit;
+```
 ___
 
 Script mariadb-server.sh
+```
 #!/bin/bash
 
 cd /usr/local/mariadb-11.7.1-linux-systemd-x86_64/bin
 ps aux | grep mysql && \
 echo OK || \
 sudo bin/mysqld_safe --user=mysql & 
-
+```
 ___
 
 Resposta do comando ps, para verificar os processos:
