@@ -105,6 +105,10 @@ sudo systemctl restart postgresql
 ```bash
 systemctl status postgresql
 ```
+>Se posteriormente ocorrer erros e o banco estiver inacessível, talvez seja necessário DEPURAR usando o status. Para isso, o comando deve ser efetuado indicando a versão:
+>>`systemctl status postgresql@14-main.service`  
+>Também pode ser necessário verificar os logs do postgresql:  
+>>`sudo tail -n 50 /var/log/postgresql/postgresql-14-main.log`  
 
 Modificar senha do usuario postgres no template
 
