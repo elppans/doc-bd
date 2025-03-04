@@ -34,6 +34,8 @@ sudo sed -i '/pt_BR ISO-8859-1/s/#//' /etc/locale.gen
 grep pt /etc/locale.gen
 sudo locale-gen
 ```
+>Sempre verificar após uma atualização, se o arquivo `/etc/locale.gen`foi sobrescrito.  
+>Caso a linha `pt_BR ISO-8859-1` estiver comentada, faça o sed novamente para descomentar.  
 
 ## Instalar certificados e repositório PostgreSQL:
 
@@ -128,6 +130,12 @@ Reiniciar o PostgreSQL
 sudo systemctl restart postgresql
 systemctl status postgresql
 ```
+>>`systemctl status postgresql@16-main.service`  
+>
+>Também pode ser necessário verificar os logs do postgresql:  
+>>`sudo tail -n 50 /var/log/postgresql/postgresql-16-main.log`  
+>
+>Para saber mais, veja [Diferenças dos status postgresql](https://github.com/elppans/doc-bd/blob/main/status_postgresql.md)  
 
 Modificar senha do usuario postgres no template
 
