@@ -31,7 +31,8 @@ grep pt /etc/locale.gen
 ```bash
 sudo locale-gen
 ```
-
+>Sempre verificar após uma atualização, se o arquivo `/etc/locale.gen`foi sobrescrito.  
+>Caso a linha `pt_BR ISO-8859-1` estiver comentada, faça o `sed` novamente para descomentar.  
 ## Atualize os repositórios
 
 ```bash
