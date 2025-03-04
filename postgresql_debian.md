@@ -35,7 +35,7 @@ grep pt /etc/locale.gen
 sudo locale-gen
 ```
 >Sempre verificar após uma atualização, se o arquivo `/etc/locale.gen`foi sobrescrito.  
->Caso a linha `pt_BR ISO-8859-1` estiver comentada, faça o sed novamente para descomentar.  
+>Caso a linha `pt_BR ISO-8859-1` estiver comentada, faça o `sed` novamente para descomentar.  
 
 ## Instalar certificados e repositório PostgreSQL:
 
