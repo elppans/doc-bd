@@ -1,21 +1,19 @@
 # Diferença entre 2 comandos pg_dump:
 
-1)
+1) Dump puro, sem compressão (Plaintext)
 ```
-pg_dump --verbose --host 127.0.0.1 --port 5432 --username postgres --inserts -d ZeusRetail > /opt/DUMP/ZeusRetail_"$(cat /opt/DUMP/vers_db)"_"$date_dump".dmp
-```
-
-2)
-
-```
-pg_dump --verbose --host 127.0.0.1 --port 5432 --username postgres --no-owner --no-acl -Fc ZeusRetail > /opt/backup/PRIME_PENALVA_"$date_dump".dump.backup
+pg_dump --verbose --host 127.0.0.1 --port 5432 --username postgres --inserts -d ZeusRetail > /opt/DUMP/ZeusRetail_"$(date +%d%m%y%H%M)".dmp
 ```
 
-- Resposta:
+2) Dump com compressão (Backup)
 
-Claro! Vamos analisar esses dois comandos do `pg_dump` para o PostgreSQL:
+```
+pg_dump --verbose --host 127.0.0.1 --port 5432 --username postgres --no-owner --no-acl -Fc ZeusRetail > /opt/backup/ZeusRetail_"$(date +%d%m%y%H%M)".dump.backup
+```
+___
+## Analise dos dois comandos do `pg_dump`:
 
-1. O primeiro comando:
+1. Dump puro (Plaintext):
    
    ```
    pg_dump --verbose --host 127.0.0.1 --port 5432 --username postgres --inserts -d ZeusRetail > /opt/DUMP/ZeusRetail_"$(cat /opt/DUMP/vers_db)"_"$date_dump".dmp
@@ -31,7 +29,7 @@ Claro! Vamos analisar esses dois comandos do `pg_dump` para o PostgreSQL:
      - `-d ZeusRetail`: Especifica o nome da base de dados.
    - O resultado é redirecionado para o arquivo `/opt/DUMP/ZeusRetail_"$(cat /opt/DUMP/vers_db)"_"$date_dump".dmp`.
 
-2. O segundo comando:
+2. Dump Backup:
    
    ```
    pg_dump --verbose --host 127.0.0.1 --port 5432 --username postgres --no-owner --no-acl -Fc ZeusRetail > /opt/backup/PRIME_PENALVA_"$date_dump".dump.backup
