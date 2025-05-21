@@ -135,7 +135,7 @@ systemctl status postgresql
 >Também pode ser necessário verificar os logs do postgresql:  
 >>`sudo tail -n 50 /var/log/postgresql/postgresql-16-main.log`  
 >
->Para saber mais, veja [Diferenças dos status postgresql](https://github.com/elppans/doc-bd/blob/main/status_postgresql.md)  
+>Para saber mais, veja [Diferenças dos status postgresql](https://elppans.github.io/doc-bd/status_postgresql)  
 
 Modificar senha do usuario postgres no template
 
