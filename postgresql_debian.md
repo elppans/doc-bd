@@ -164,7 +164,7 @@ psql -h127.0.0.1 -p 5432 -U pgadmin -l
 Adicionar "Funções" no Banco
 
 ```
-wget -c https://raw.githubusercontent.com/elppans/zretail/master/function.sql
+wget -c https://raw.githubusercontent.com/elppans/doc-bd/refs/heads/main/function.sql
 psql -h127.0.0.1 -p 5432 -d db.`hostname` -U pgadmin -W -f function.sql
 ```
 
