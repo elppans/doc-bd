@@ -112,7 +112,7 @@ systemctl status postgresql
 >Também pode ser necessário verificar os logs do postgresql:  
 >>`sudo tail -n 50 /var/log/postgresql/postgresql-14-main.log`  
 >
->Para saber mais, veja [Diferenças dos status postgresql](https://github.com/elppans/doc-bd/blob/main/status_postgresql.md)  
+>Para saber mais, veja [Diferenças dos status postgresql](https://elppans.github.io/doc-bd/status_postgresql)  
 
 Modificar senha do usuario postgres no template
 
@@ -141,7 +141,7 @@ psql -h127.0.0.1 -p 5432 -U pgadmin -l
 Adicionar "Funções" no Banco
 
 ```bash
-wget -c https://raw.githubusercontent.com/elppans/zretail/master/function.sql
+wget -c https://raw.githubusercontent.com/elppans/doc-bd/refs/heads/main/function.sql
 ```
 
 ```bash
