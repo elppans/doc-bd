@@ -243,7 +243,9 @@ sudo firewall-cmd --reload
 ```bash
 sudo firewall-cmd --list-all
 ```
-
+___
+- Script recomendado: [linux-standby-off](https://github.com/elppans/linux-standby-off)  
+___
 - Fontes:
 
 [postgresql, Linux downloads (Debian)](https://www.postgresql.org/download/linux/debian/)  
