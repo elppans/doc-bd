@@ -10,6 +10,8 @@ SELECT version();
 
 ```bash
 psql -p 5432 -U postgres -c "CREATE USER NOMEUSUARIO SUPERUSER INHERIT CREATEDB CREATEROLE" -d template1
+```
+```bash
 psql -p 5432 -U postgres -c "ALTER USER NOMEUSUARIO WITH PASSWORD 'SENHA'" -d template1
 ```
 
@@ -82,6 +84,8 @@ pg_dump --verbose --host 127.0.0.1 --port 5432 --username postgres -d NOMEBANCO 
 
 ```bash
 psql --host 127.0.0.1 --port 5432 --username postgres --file /opt/BDBKP/NOMEBANCO.dmp NOMEBANCO
+```
+```bash
 psql --host 127.0.0.1 --port 5432 --username postgres -d NOMEBANCO -f /opt/custom/function.sql
 ```
 
@@ -156,13 +160,21 @@ psql -p 5432 -d NOMEBANCO -U postgres -c "\copy (SELECT * FROM TABELA) to '/opt/
 
 ```bash
 "\copy (SELECT * FROM TABELA) to '/opt/arquivo.CSV' with csv HEADER"
+```
+```bash
 "\copy (SELECT * FROM TABELA) to '/opt/arquivo.CSV' with csv DELIMITER ',' HEADER"
+```
+```bash
 "\copy (SELECT * FROM TABELA) to '/opt/arquivo.CSV' with csv DELIMITER ';' HEADER"
+```
+```bash
 "copy (SELECT * FROM TABELA) to '/opt/arquivo.CSV' (DELIMITER ';');"
+```
+```bash
 "COPY TABELA TO '/opt/arquivo.CSV' DELIMITER ';' NULL 'NULL' CSV HEADER;"
+```
+```bash
 "COPY TABELA TO '/opt/arquivo.CSV' DELIMITER '&' NULL '' CSV HEADER;"
-
-
 ```
 
 ### Via vacuumdb, VACUUM e ANALYZE em BANCO determinado, completo:
@@ -175,6 +187,8 @@ vacuumdb -h 127.0.0.1 -p 5432 -U postgres -w -d NOMEBANCO -v -f -z
 
 ```bash
 vacuumdb -h 127.0.0.1 -p 5432 -U postgres -w -d NOMEBANCO -v -f -t public.TABELA
+```
+```bash
 vacuumdb -h 127.0.0.1 -p 5432 -U postgres -w -d NOMEBANCO -v -Z -t public.TABELA
 ```
 ### Via vacuumdb, VACUUM "E" ANALYZE em tabela determinada:
