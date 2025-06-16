@@ -59,7 +59,8 @@ psql -U postgres -c "SELECT * FROM pg_stat_activity WHERE query LIKE '%autovacuu
 psql -U postgres -c "SELECT pid, query FROM pg_stat_activity WHERE query LIKE 'VACUUM%';"
 psql -U postgres -c "SELECT pg_terminate_backend(pid);"
 ```
+```bash
 psql -U postgres -c "SELECT pid, query FROM pg_stat_activity WHERE query LIKE 'REINDEX%';"
 psql -U postgres -c "SELECT pg_terminate_backend(pid);"
-
+```
 
