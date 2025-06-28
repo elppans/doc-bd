@@ -35,7 +35,7 @@ grep pt /etc/locale.gen
 ```bash
 sudo locale-gen
 ```
-## Evitar perder a configuração do "locales"
+## Evitar perder a configuração dos arquivos "locale"
 
 - Use o `dpkg-divert` para que o sistema não sobrescreva seus arquivos durante atualizações
 
