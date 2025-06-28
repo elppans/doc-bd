@@ -32,11 +32,13 @@ sudo systemctl restart NetworkManager
 ## Configurar o locale.alias
 
 ```bash
-sudo cp -av /etc/locale.alias /etc/locale.alias.bkp
+sudo cp -av /etc/locale.alias /etc/locale.alias.original
 ```
+
 ```bash
 echo -e 'pt_BR pt_BR.ISO-8859-1' | sudo tee -a /etc/locale.alias
 ```
+
 ```bash
 grep pt /etc/locale.alias
 ```
@@ -44,16 +46,47 @@ grep pt /etc/locale.alias
 ## Configurar locale.gen
 
 ```bash
+sudo cp -av /etc/locale.gen /etc/locale.gen.original
+```
+
+```bash
 sudo sed -i '/pt_BR ISO-8859-1/s/#//' /etc/locale.gen
 ```
+
 ```bash
 grep pt /etc/locale.gen
 ```
+
 ```bash
 sudo locale-gen
 ```
->Sempre verificar após uma atualização, se o arquivo `/etc/locale.gen`foi sobrescrito.  
->Caso a linha `pt_BR ISO-8859-1` estiver comentada, faça o `sed` novamente para descomentar.  
+## Evitar perder a configuração do "locales"
+
+- Use o `dpkg-divert` para que o sistema não sobrescreva seus arquivos durante atualizações
+
+```bash
+sudo dpkg-divert --add --rename --divert /etc/locale.alias.real /etc/locale.alias
+```
+```bash
+sudo dpkg-divert --add --rename --divert /etc/locale.gen.real /etc/locale.gen
+```
+
+- Replique os arquivos novamente
+
+```bash
+sudo cp -a /etc/locale.alias.real /etc/locale.alias
+```
+```bash
+sudo cp -a /etc/locale.gen.real /etc/locale.gen
+```
+
+- Comparando os arquivos
+
+```bash
+ls -all /etc/locale*
+```
+>Para mais informações, veja [Ubuntu, arquivos locale customizados](https://github.com/elppans/doc-linux/blob/main/ubuntu_arquivos_locale_customizados.md)  
+
 
 ## Instalar certificados e repositório PostgreSQL:
 
