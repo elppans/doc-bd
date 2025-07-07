@@ -11,3 +11,5 @@ Indice:
 7) [PostgreSQL no CentOS 7, FIM DO SUPORTE](postgresql_centos7)  
 8) [PostgreSQL no CentOS 8, via módulo, FIM DO SUPORTE](postgresql_centos8_v_modulo)  
 9) [PostgreSQL no CentOS, via repositório PGDG](postgresql_centos_pgdg)  
+___
+Privado: [sh-bd](https://github.com/elppans/sh-bd)  
