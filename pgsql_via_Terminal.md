@@ -5,6 +5,7 @@
 ```bash
 SELECT version();
 ```
+___
 
 ### Criar um Super Usuário no Banco:
 
@@ -26,6 +27,7 @@ psql -p 5432 -U postgres -c "SELECT usename FROM pg_user"
 ```bash
 psql -p 5432 -U postgres -c "SELECT * FROM pg_user"
 ```
+___
 
 ### Listar bancos:
 
@@ -88,13 +90,17 @@ psql --host 127.0.0.1 --port 5432 --username postgres --file /opt/BDBKP/NOMEBANC
 ```bash
 psql --host 127.0.0.1 --port 5432 --username postgres -d NOMEBANCO -f /opt/custom/function.sql
 ```
-
+___
 ### Executar comandos no psql:
 
 ```bash
 psql -p 5432 -d NOMEBANCO -U postgres -c "COMANDO"
 ```
-
+### Desconectar todos os usuários de um banco específico:
+```bash
+psql -d NOMEBANCO -c "SELECT pg_terminate_backend(pg_stat_activity.pid) FROM pg_stat_activity WHERE pg_stat_activity.datname = 'NOMEBANCO' AND pid <> pg_backend_pid();"
+```
+___
 ### Verificar tamanho do Banco, em bytes:
 
 ```bash
@@ -147,14 +153,12 @@ ORDER BY
   total_size DESC
 ;
 ```
-
+___
 ### Exportar Select para CSV:
 
 ```bash
 psql -p 5432 -d NOMEBANCO -U postgres -c "\copy (SELECT * FROM TABELA) to '/opt/arquivo.CSV' with csv"
 ```
-
-
 
 #### Exportar Select para CSV usando delimitadores:
 
@@ -176,7 +180,7 @@ psql -p 5432 -d NOMEBANCO -U postgres -c "\copy (SELECT * FROM TABELA) to '/opt/
 ```bash
 "COPY TABELA TO '/opt/arquivo.CSV' DELIMITER '&' NULL '' CSV HEADER;"
 ```
-
+___
 ### Via vacuumdb, VACUUM e ANALYZE em BANCO determinado, completo:
 
 ```bash
