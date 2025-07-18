@@ -58,7 +58,10 @@ grep pt /etc/locale.gen
 ```
 
 ```bash
-sudo locale-gen
+sudo localedef -i pt_BR -f ISO-8859-1 pt_BR.ISO-8859-1
+```
+```bash
+locale -a | grep pt_BR
 ```
 ## Evitar perder a configuração dos arquivos "locale"
 
