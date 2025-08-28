@@ -25,7 +25,7 @@ Forçar um dump simples (sem compressão, sem paralelismo, para reduzir stress d
 PGUSER=usuario PGPASSWORD=senha pg_dump -h localhost -p 5432 --no-password --format=plain --encoding=LATIN1 --verbose --file=/caminho/backup.sql nome_do_banco
 ```
 
-⚠️ Se der erro de leitura em algumas tabelas, você pode tentar **forçar tabela a tabela**:
+- Se der erro de leitura em algumas tabelas, você pode tentar **forçar tabela a tabela**:
 
 ```bash
 pg_dump -t nome_da_tabela nome_do_banco > tabela.sql
