@@ -1,6 +1,9 @@
 # PostgreSQL no Debian
 
-## Instalar gerenciador de rede e configurar IP
+## Instalar gerenciador de rede e configurar IP (OPCIONAL)
+
+Se durante a instalação do Debian, optou de usar DHCP e tiver a necessidade de configurar um IP fixo, é mais fácil usar o aplicativo do `Network Manager User Interfacec (nmtui)`.  
+Se optou por configurar um IP fixo durante a instalação ou não houver necessidade de configurar depois, pule esta etapa para `Configurando locales para ISO-8859-1`.  
 
 ```bash
 sudo apt update && sudo apt upgrade
@@ -28,6 +31,9 @@ sudo systemctl restart NetworkManager
 ```
 
 ## Configurando locales para ISO-8859-1:
+
+O Manager utiliza a codificaçao `LATIN1 (ISO-8859-1)`, então é recomendável não só instalar o banco, mas configurar para que seja usado esta codificão por padrão.  
+Para usar a codificação `ISO-8859-1` no banco, deve configurar para que o sistema também use ou tenha suporte, senão não dá pra configurar o banco para esta codificação.  
 
 ## Configurar o locale.alias
 
