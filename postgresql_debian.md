@@ -103,7 +103,7 @@ ls -all /etc/locale*
 ## Instalar certificados e repositório PostgreSQL:
 
 ```bash
-sudo apt -y install curl ca-certificates gnupg gnupg2 vim nano
+sudo apt -y install curl ca-certificates gnupg gnupg2 lsb-release vim nano
 ```
 
 ### Criar a configuração do repositório de arquivos
