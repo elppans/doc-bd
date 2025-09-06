@@ -70,7 +70,7 @@ sudo localedef -i pt_BR -f ISO-8859-1 pt_BR.ISO-8859-1
 locale -a | grep pt_BR
 ```
 ```bash
-locale-gen
+sudo locale-gen
 ```
 ## Evitar perder a configuração dos arquivos "locale"
 
