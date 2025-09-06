@@ -63,6 +63,9 @@ sudo localedef -i pt_BR -f ISO-8859-1 pt_BR.ISO-8859-1
 ```bash
 locale -a | grep pt_BR
 ```
+```bash
+locale-gen
+```
 ## Evitar perder a configuração dos arquivos "locale"
 
 - Use o `dpkg-divert` para que o sistema não sobrescreva seus arquivos durante atualizações
@@ -94,7 +97,7 @@ ls -all /etc/locale*
 ## Instalar certificados e repositório PostgreSQL:
 
 ```bash
-sudo apt -y install curl ca-certificates gnupg
+sudo apt -y install curl ca-certificates gnupg gnupg2 vim nano
 ```
 
 ### Criar a configuração do repositório de arquivos
