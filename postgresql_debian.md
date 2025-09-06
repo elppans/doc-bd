@@ -103,7 +103,7 @@ ls -all /etc/locale*
 ## Instalar certificados e repositório PostgreSQL:
 
 ```bash
-sudo apt -y install curl ca-certificates gnupg gnupg2 lsb-release vim nano
+sudo apt -y install curl ca-certificates gnupg gnupg2 wget lsb-release vim nano
 ```
 
 ### Criar a configuração do repositório de arquivos
@@ -114,11 +114,14 @@ sudo sh -c 'echo "deb http://apt.postgresql.org/pub/repos/apt $(lsb_release -cs)
 
 ### Importar a chave de assinatura do repositório
 
+Em versões mais atuais do Debian não existe mais o comando `apt-key`, pois o mesmo foi descontinuado.   
+Então se der erro de comando não encotrado  para o `apt-key`, pule este comando para o próximo, que usa o comando `gpg` para adicionar a chave.  
+
 ```bash
 wget --quiet -O - https://www.postgresql.org/media/keys/ACCC4CF8.asc | sudo apt-key add -
 ```
 
-Se usando o apt-key não der certo, faça este comando
+Se usando o apt-key não der certo, faça este comando `gpg`
 
 ```bash
 curl https://www.postgresql.org/media/keys/ACCC4CF8.asc | gpg --dearmor | sudo tee /etc/apt/trusted.gpg.d/apt.postgresql.org.gpg >/dev/null
