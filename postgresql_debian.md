@@ -168,18 +168,9 @@ sudo pg_ctlcluster 16 main start
 ```bash
 PGDATA="/var/lib/postgresql/16/main"
 ```
-```bash
-export IPROUTE=$(ip route show | grep -E 'kernel|dev' | awk '{ print $1 }' | head -1)
-```
-```bash
-echo -e "\nhost all all 0.0.0.0/0 trust\n" | sudo tee -a /etc/postgresql/16/main/pg_hba.conf
-```
-```bash
-echo -e "\nhost all all "$IPROUTE" trust\n" | sudo tee -a /etc/postgresql/16/main/pg_hba.conf
-```
 - Edição manual do pg_hba.conf:
   
-Edite o arquivo /etc/postgresql/{VERSAO DO POSTGRES}/main/pg_hba.conf e adicione no final do arquivo o IP 0.0.0.0 e o IP do servidor para que seja liberado a comunicação do Manager com o banco:
+Edite o arquivo /etc/postgresql/16/main/pg_hba.conf e adicione no final do arquivo o IP 0.0.0.0 e o IP do servidor para que seja liberado a comunicação do Manager com o banco:
 
 ```ini
 host all all 0.0.0.0/0 trust
