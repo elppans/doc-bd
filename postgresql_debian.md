@@ -170,8 +170,8 @@ PGDATA="/var/lib/postgresql/16/main"
 ```
 - Edição manual do pg_hba.conf:
   
-Edite o arquivo /etc/postgresql/16/main/pg_hba.conf e adicione no final do arquivo o IP 0.0.0.0 e o IP do servidor para que seja liberado a comunicação do Manager com o banco:
-
+Edite o arquivo /etc/postgresql/16/main/pg_hba.conf e adicione no final do arquivo o IP 0.0.0.0 e o IP do servidor para que seja liberado a comunicação do Manager com o banco:  
+Exemplo:  
 ```ini
 host all all 0.0.0.0/0 trust
 host all all 192.168.15.90/24 trust
@@ -189,7 +189,7 @@ sudo sed -i '/listen_addresses/s/localhost/*/' /etc/postgresql/16/main/postgresq
 sudo sed -i "s/^#*\(port = \).*/\15432/" /etc/postgresql/16/main/postgresql.conf
 ```
 
-- Edição manual do arquivo postgresql.conf:  
+- Edição manual do arquivo postgresql.conf (Se os 3 comandos anteriores não funcionar):  
 
 Ache a linha com `listen_addresses`, descomente e deixe desta forma:  
 
