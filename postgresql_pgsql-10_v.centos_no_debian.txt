@@ -2,7 +2,7 @@ PostgreSQL-pgsql-10_V.CentOS_no_Debian
 PostgreSQL 10 V. CentOS no Debian
 
 sudo tar -zcvf usr_lib_pgsql-10-centos7_full.tar.gz /usr/pgsql-10/ /lib/systemd/system/postgresql-10.service
-
+postgresql_pgsql-10_v.centos_no_debian.txt
 No servidor ($HOME):
 
 sudo su
