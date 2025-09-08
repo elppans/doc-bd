@@ -40,11 +40,25 @@ psql  -p 5432 -U postgres -l
 ```bash
 createdb -U postgres NOMEBANCO NOMEBANCO
 ```
+___
+
 ### Criar banco, com Encoding `LATIN1`, Collate/CType `ISO8859-1`:  
 
 ```
 createdb -U postgres -E LATIN1 --locale=pt_BR.iso88591 -T template0 NOMEBANCO
 ```
+
+### Criar banco especificando Encoding no Windows
+
+**Windows-1252 (WIN1252)** é uma **superset** de **ISO-8859-1 (LATIN1)**
+Todos os caracteres de **ISO-8859-1** estão presentes em **WIN1252**
+**WIN1252** inclui alguns caracteres extras nos códigos **0x80–0x9F** `(como € e ‘ ’ “ ”)`
+
+```bash
+createdb -U postgres -E WIN1252 --locale=Portuguese_Brazil.1252 -T template0 mihara.database
+```
+
+___
 
 ### Renomear banco:
 
