@@ -55,7 +55,7 @@ Todos os caracteres de **ISO-8859-1** estão presentes em **WIN1252**
 **WIN1252** inclui alguns caracteres extras nos códigos **0x80–0x9F** `(como € e ‘ ’ “ ”)`
 
 ```bash
-createdb -U postgres -E WIN1252 --locale=Portuguese_Brazil.1252 -T template0 mihara.database
+createdb -U postgres -E WIN1252 --locale=Portuguese_Brazil.1252 -T template0 NOMEBANCO
 ```
 
 ___
