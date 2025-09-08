@@ -1,0 +1,114 @@
+PostgreSQL-pgsql-10_V.CentOS_no_Debian
+PostgreSQL 10 V. CentOS no Debian
+
+sudo tar -zcvf usr_lib_pgsql-10-centos7_full.tar.gz /usr/pgsql-10/ /lib/systemd/system/postgresql-10.service
+
+No servidor ($HOME):
+
+sudo su
+tar -zxvf usr_lib_pgsql-10-centos7_full.tar.gz -C /
+systemctl stop postgresql.service
+systemctl disable postgresql.service
+systemctl status postgresql.service
+
+cat /etc/environment
+PATH="/usr/pgsql-10/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin"
+LD_LIBRARY_PATH="/usr/pgsql-10/lib:/usr/pgsql-10/lib64
+PGDATA="/var/lib/pgsql/10/data/"
+
+mkdir -p /var/lib/pgsql
+chown -R postgres:postgres /var/lib/pgsql
+sudo cp -a /etc/skel/{.bash*,.profile} /var/lib/postgresql
+
+mkdir -p -m 777 /opt/backup
+scp -r pdvtec@192.168.15.100:/mnt/opt/BDBKP/db.buri.srv-2.14.135.0_20052022.090636.backup /opt/backup
+
+exit
+sudo su postgres
+cd
+echo "$PGDATA"
+
+#PATH="/usr/pgsql-10/bin:$PATH" \
+#LD_LIBRARY_PATH="/usr/pgsql-10/lib:/usr/pgsql-10/lib64:$LD_LIBRARY_PATH" \
+#PGDATA="/var/lib/pgsql/10/data/" \
+/usr/pgsql-10/bin/initdb -E LATIN1 --locale=pt_BR.iso88591 -D "$PGDATA"
+
+export IPROUTE=$(ip route show | grep kernel | awk '{ print $1 }' | head -1) && echo $IPROUTE
+echo -e "\nhost all all "$IPROUTE" trust\n" | tee -a $PGDATA/pg_hba.conf
+echo -e "\nhost all all 0.0.0.0/0 trust\n" | tee -a $PGDATA/pg_hba.conf
+echo -e "\nhost all all 192.168.15.100/24 trust\n" | tee -a $PGDATA/pg_hba.conf
+echo -e "\nhost all all 192.168.15.1111/24 trust\n" | tee -a $PGDATA/pg_hba.conf
+echo -e "\nhost all all 192.168.15.0/24 trust\n" | tee -a $PGDATA/pg_hba.conf
+cat $PGDATA/pg_hba.conf
+
+sed -i '/listen_addresses/s/#//' $PGDATA/postgresql.conf
+sed -i '/listen_addresses/s/localhost/*/' $PGDATA/postgresql.conf
+grep listen_addresses $PGDATA/postgresql.conf
+
+sed -i "s/^#*\(port = \).*/\15432/" $PGDATA/postgresql.conf
+grep 5432 $PGDATA/postgresql.conf
+
+exit
+
+sudo systemctl daemon-reload
+sudo systemctl start postgresql-10.service
+sudo systemctl status postgresql-10.service
+
+sudo su postgres
+cd
+psql -U postgres -c "ALTER USER postgres WITH PASSWORD 'postgres'" -d template1
+createdb -h 127.0.0.1 -p 5432 -U postgres -E LATIN1 --locale=pt_BR.iso88591 -T template0 db.`hostname`
+psql -l
+
+curl -JOL https://raw.githubusercontent.com/elppans/doc-bd/refs/heads/main/function.sql
+psql -h 127.0.0.1 -p 5432 -d db.`hostname` -U postgres -f function.sql
+
+___
+
+sudo systemctl stop postgresql-10.service
+sudo systemctl status postgresql-10.service
+sudo nano /etc/environment # comentar as linhas
+exit
+login
+sudo systemctl start postgresql.service
+sudo systemctl enable postgresql.service
+systemctl status postgresql.service
+# sudo systemctl enable postgresql@16.service
+# sudo systemctl start postgresql@16.service
+systemctl status postgresql@16.service
+sudo su - postgres
+psql -l | cat
+
+____________________________________________________________________
+
+pg_restore --host 127.0.0.1 --port 5432 --username postgres --dbname NOMEBANCO --no-password  --verbose ~/NOMEBANCO.backup
+Arquivo restore.sh:
+
+#!/bin/bash
+
+# Comando
+command="$(basename $0)"
+
+# Diretório do arquivo
+file_dir="$(dirname "$command")" # "$(dirname "$file")"
+mkdir -p "$file_dir/LOGGERAL"
+
+# Caminho do log
+log_file="$file_dir/LOGGERAL/$command".log # lnx_conv_log.txt"
+
+# Log geral
+LOGFILE="$log_file" # ${0##*/}".log
+LOGFILEERROR="$log_file"_error # ${0##*/}"_error.log
+exec 1> >(tee -a "$LOGFILE")
+exec 2> >(tee -a "$LOGFILEERROR")
+
+pg_restore \
+-d db.burisrv \
+-j 4 \
+--no-owner \
+--role=postgres \
+--verbose \
+/opt/backup/db.buri.srv-2.14.135.0_20052022.090636.backup 2>>"$LOGFILEERROR"
+
+# - Executar direto no servidor
+chmod +x restore.sh
