@@ -145,6 +145,28 @@ FROM information_schema.tables
 WHERE table_schema = 'public'
 ORDER BY pg_total_relation_size('"' || table_name || '"') DESC;
 ```
+### União entre "Verificar tamanho do banco" e "Tamanho TODAS as tabelas do banco"
+
+```sql
+-- Tamanho do Banco
+select datname AS "Nome", 
+  pg_size_pretty(pg_database_size(datname)) AS "Tamanho",
+  pg_database_size(datname) AS tamanho_bytes
+FROM pg_database
+--where datname = 'Banco';
+UNION all
+-- Tamanho das tabelas 
+SELECT table_name AS "Nome",
+       pg_size_pretty(pg_total_relation_size('"' || table_name || '"')) AS "Tamanho",
+       pg_total_relation_size('"' || table_name || '"') AS tamanho_bytes
+FROM information_schema.tables
+WHERE table_schema = 'public'
+--ORDER BY pg_total_relation_size('"' || table_name || '"') DESC;
+
+-- 3ª Coluna, para unir o Banco e Tabelas, por tamanho em bytes
+ORDER BY tamanho_bytes DESC;
+```
+___
 
 ### Tamanho TODAS as tabelas do banco, em ordem de tamanho, do maior pro menor, tabelas de [10+ GB](https://github.com/elppans/doc-linux/blob/main/1024_em_computacao.md)
 
