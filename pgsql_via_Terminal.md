@@ -2,7 +2,7 @@
 
 ### Select para Verificar a versão do PostgreSQL
 
-```bash
+```sql
 SELECT version();
 ```
 ___
@@ -44,7 +44,7 @@ ___
 
 ### Criar banco, com Encoding `LATIN1`, Collate/CType `ISO8859-1`:  
 
-```
+```bash
 createdb -U postgres -E LATIN1 --locale=pt_BR.iso88591 -T template0 NOMEBANCO
 ```
 
@@ -126,19 +126,19 @@ psql -p 5432 -d NOMEBANCO -U postgres -c "select pg_database_size('NOMEBANCO');"
 
 ##### Database Size: 
 
-```bash
+```sql
 SELECT pg_size_pretty(pg_database_size('Database Name'));
 ```
 
 ##### Table Size:
 
-```bash
+```sql
 SELECT pg_size_pretty(pg_relation_size('table_name'));
 ```
 
 ### Tamanho TODAS as tabelas do banco, em ordem de tamanho, do maior pro menor
 
-```bash
+```sql
 SELECT table_name AS "NomeTabela",
        pg_size_pretty(pg_total_relation_size('"' || table_name || '"')) AS "Tamanho"
 FROM information_schema.tables
@@ -146,6 +146,7 @@ WHERE table_schema = 'public'
 ORDER BY pg_total_relation_size('"' || table_name || '"') DESC;
 ```
 ### União entre "Verificar tamanho do banco" e "Tamanho TODAS as tabelas do banco"
+>Colunas: Nome, Tamanho (Eq. du -sh) e Tamanho em Bytes (Eq. du -s)
 
 ```sql
 -- Tamanho do Banco
@@ -170,7 +171,7 @@ ___
 
 ### Tamanho TODAS as tabelas do banco, em ordem de tamanho, do maior pro menor, tabelas de [10+ GB](https://github.com/elppans/doc-linux/blob/main/1024_em_computacao.md)
 
-```bash
+```sql
 SELECT
   table_name,
   pg_size_pretty(total_size) AS total_size
@@ -198,22 +199,22 @@ psql -p 5432 -d NOMEBANCO -U postgres -c "\copy (SELECT * FROM TABELA) to '/opt/
 
 #### Exportar Select para CSV usando delimitadores:
 
-```bash
+```sql
 "\copy (SELECT * FROM TABELA) to '/opt/arquivo.CSV' with csv HEADER"
 ```
-```bash
+```sql
 "\copy (SELECT * FROM TABELA) to '/opt/arquivo.CSV' with csv DELIMITER ',' HEADER"
 ```
-```bash
+```sql
 "\copy (SELECT * FROM TABELA) to '/opt/arquivo.CSV' with csv DELIMITER ';' HEADER"
 ```
-```bash
+```sql
 "copy (SELECT * FROM TABELA) to '/opt/arquivo.CSV' (DELIMITER ';');"
 ```
-```bash
+```sql
 "COPY TABELA TO '/opt/arquivo.CSV' DELIMITER ';' NULL 'NULL' CSV HEADER;"
 ```
-```bash
+```sql
 "COPY TABELA TO '/opt/arquivo.CSV' DELIMITER '&' NULL '' CSV HEADER;"
 ```
 ___
