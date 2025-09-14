@@ -43,7 +43,37 @@ ___
    - O resultado é redirecionado para o arquivo `/opt/backup/PRIME_PENALVA_"$date_dump".dump.backup`.
 
 Em resumo, o primeiro comando gera um *dump* com comandos `INSERT` e inclui informações sobre proprietários e permissões. O segundo comando não inclui essas informações e usa um formato compactado. 
+___
 
+# Exemplos de comandos para Dump/Backup
+
+- Dump legível:
+```bash
+pg_dump --verbose --schema-only --no-owner --no-acl --inserts -d ZeusRetail > ZeusRetail_"$(date +%d%m%y%H%M)".dmp
+```
+- Restaurar Dump legível:
+```bash
+psql -d ZeusRetail -f ZeusRetail_1409242036.dmp 
+```
+___
+- Dump legível + compressão
+```bash
+pg_dump --verbose --schema-only --no-owner --no-acl --inserts -d ZeusRetail | gzip > ZeusRetail_"$(date +%d%m%y%H%M)".dmp.gz
+```
+- Restaurar Dump legível + compressão:
+```bash
+gunzip -c ZeusRetail_1409242036.dmp.gz | psql -d ZeusRetail
+```
+___
+- Dump binário já compactado
+```bash
+pg_dump --verbose --schema-only --no-owner --no-acl -Fc -d ZeusRetail > ZeusRetail_"$(date +%d%m%y%H%M)".dump.backup
+```
+- Restaurar Dump binário já compactado:
+```bash
+pg_restore -U postgres -d novo_banco /opt/backup/db.buri.srv-2.14.135.0_20052022.090636.backup
+```
+___
 Fontes:
 1. [pg_dump: aborting because of server version mismatch.](https://stackoverflow.com/questions/45051633/pg-dump-aborting-because-of-server-version-mismatch)
 2. [PostgreSQL: Could not connect to server: TCP/IP connections on port 5432](https://stackoverflow.com/questions/55326804/postgresql-could-not-connect-to-server-tcp-ip-connections-on-port-5432)
