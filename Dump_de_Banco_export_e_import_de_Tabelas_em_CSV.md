@@ -1,4 +1,4 @@
-# Dump de banco export e import de tabelas em csv
+# Dump de banco export e import de tabelas em csv (POSTGRESQL)
 
 Deve instalar o pacote **git** e **logar** como **postgres**.  
 Para logar como postgres, se tiver acesso ao root, logue com o mesmo e faça:
