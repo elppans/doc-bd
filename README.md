@@ -12,5 +12,5 @@ Indice:
 8) [PostgreSQL no CentOS 8, via módulo, FIM DO SUPORTE](postgresql_centos8_v_modulo)  
 9) [PostgreSQL no CentOS, via repositório PGDG](postgresql_centos_pgdg)  
 10) [Dump de banco, export e import de Tabelas em CSV](Dump_de_Banco_export_e_import_de_Tabelas_em_CSV)  
-___
+___  
 Privado: [sh-bd](https://github.com/elppans/sh-bd)  
