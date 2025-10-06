@@ -13,8 +13,10 @@ Para a instalação do PostgreSQL, não é necessário adicionar o repositório 
 Independente de adicionar ou não, **atualize a Distro**.  
 Após a atualização, **se foi atualizado o Kernel, reinicie o sistema**.  
 
-```
+```bash
 sudo dnf updateinfo
+```
+```bash
 sudo dnf -y update
 ```
 
@@ -32,37 +34,37 @@ sudo dnf install -y https://download.postgresql.org/pub/repos/yum/reporpms/EL-9-
 >Será instalado a versão 16, que é a versão estável mais alta, no momento da publicação desta matéria.  
 >Para instalar outra versão, acesse o site oficial [postgresql.org](https://www.postgresql.org/).  
 
-```
+```bash
 sudo dnf -y config-manager --disable pgdg{12,13,14,15} &>> /dev/null
 ```
 
 ### Desativar módulos PostgreSQL embutido:
 
-```
+```bash
 sudo dnf -qy module disable postgresql
 ```
 
 ### Validar a llista de módulos, se está desativado
 
-```
+```bash
 sudo dnf module list --disabled
 ```
 
 ### Atualizar a lista de repositórios
 
-```
+```bash
 sudo dnf -y updateinfo
 ```
 
 # Instalar PostgreSQL:
 
-```
+```bash
 sudo dnf install -y postgresql16-server
 ```
 
 Verificar se a versão desejada foi instalado corretamente  
 
-```
+```bash
 psql --version
 ```
 
@@ -70,25 +72,25 @@ psql --version
 
 - Iniciar uso do banco de dados
 
-```
+```bash
 sudo /usr/pgsql-16/bin/postgresql-16-setup initdb
 ```
 
 - Ativar o PostgreSQL na inicialização do sistema (SystemD)
 
-```
+```bash
 sudo systemctl enable postgresql-16
 ```
 
 - Iniciar o serviço do PostgreSQL
 
-```
+```bash
 sudo systemctl start postgresql-16
 ```
 
 - Verificar o estado do serviço:
 
-```
+```bash
 sudo systemctl status postgresql-16
 ```
 
@@ -100,7 +102,7 @@ Edite o arquivo `/var/lib/pgsql/{VERSAO}/data/pg_hba.conf` e adicione no final d
 
 
 
-```
+```ini
 host all all 0.0.0.0/0 trust
 host all all 192.168.15.90/24 trust
 ```
@@ -116,7 +118,7 @@ host all all 192.168.15.90/24 trust
    - Ele gera um hash de 128 bits para dados, um algoritmo de resumo de mensagem usado para autenticar mensagens e verificar conteúdo.
    - Para usar, modifique a 1º linha **"local"** trocando o usuário **`all`** para **`postgres`** e adicione no final do arquivo `pg_hba.conf` uma linha como esta*:
    
-     ```
+     ```ini
      local   all     postgres md5
      ...
      local   all     pgadmin md5
@@ -125,7 +127,7 @@ host all all 192.168.15.90/24 trust
    - Isso permite que o software gere e verifique o resumo MD5 de cada segmento enviado na conexão TCP.
    - *Crie um usuário no PostgreSQL para usar este método e para fazer tarefas administrativas:
 
-      ```
+      ```bash
       sudo -u postgres createuser -d -l -P -r -s --replication pgadmin
       ```
 
@@ -133,7 +135,7 @@ host all all 192.168.15.90/24 trust
 
 Ache a linha com listen_addresses, descomente e deixe desta forma:
 
-```
+```ini
 listen_addresses = '*'  
 ```
 
@@ -142,7 +144,7 @@ Depois salve e saia do editor.
 
 Reiniciar o PostgreSQL  
 
-```
+```bash
 sudo systemctl restart postgresql-16
 ```
 
@@ -157,7 +159,11 @@ No CentOS vem instalado por padrão, mas caso não esteja instalado, instale o p
 
 ```
 sudo yum -y install firewalld firewalld-filesystem
+```
+```bash
 sudo systemctl enable --now firewalld
+```
+```bash
 systemctl status firewalld
 ```
 
@@ -165,24 +171,24 @@ Para liberar o PostgreSQL, pode usar tanto o serviço quanto diretamente a porta
 
 - Liberando a PostgreSQL usando serviço:  
 
-```
+```bash
 sudo firewall-cmd --zone=$(firewall-cmd --get-default-zone) --permanent --add-service=postgresql
 ```
 
 - Liberando a PostgreSQL usando a porta:  
 
-```
+```bash
 sudo firewall-cmd --permanent --add-port=5432/tcp
 ```
 
 - Recarregar as configurações do FirewallD:    
 
-```
+```bash
 sudo firewall-cmd --reload 
 ```
 
 - Listando as portas liberadas:
 
-```
+```bash
 sudo firewall-cmd --list-all
 ```
