@@ -117,6 +117,7 @@ host all all 192.168.15.90/24 trust
 2. **Autenticação MD5**:
    - Ele gera um hash de 128 bits para dados, um algoritmo de resumo de mensagem usado para autenticar mensagens e verificar conteúdo.
    - Para usar, modifique a 1º linha **"local"** trocando o usuário **`all`** para **`postgres`** e adicione no final do arquivo `pg_hba.conf` uma linha como esta*:
+>a 1º linha **"local"**, pode comentar a linha e no final do arquivo adicionar a linha do postgres, se não quiser ficar usando senha até na linha de comando, troque md5 para trust
    
      ```ini
      local   all     postgres md5
@@ -142,6 +143,10 @@ listen_addresses = '*'
 Ache a linha que tem `port = 5432` e se estiver comentado, descomente.
 Depois salve e saia do editor.
 
+```ini
+port = 5432
+```
+
 Reiniciar o PostgreSQL  
 
 ```bash
@@ -151,6 +156,20 @@ sudo systemctl restart postgresql-16
 - **Para a configuração de pós instalação do PostgreSQL, veja:**
 [**Comandos pgsql via Terminal**](https://elppans.github.io/doc-bd/pgsql_via_Terminal)
 
+### Liberar portas, SELINUX  
+>Ajustar SELinux (se estiver em modo enforcing - De qualquer forma, independente é recomendado fazer esta configuração)
+
+Se o PostgreSQL estiver escutando em uma porta diferente da padrão, você precisa registrar essa porta.
+>Pelos meus testes, mesmo usando a porta padrão 5432, é recomendado fazer esta configuração
+
+- Porta fora do padrão
+```bash
+sudo semanage port -a -t postgresql_port_t -p tcp 5433
+```
+- Porta padrão
+```bash
+sudo semanage port -a -t postgresql_port_t -p tcp 5432
+```
 ### Liberar portas, Firewalld  
 
 Usando FirewallD, pode ser usado o nome do serviço ou diretamente a porta para a liberação  
