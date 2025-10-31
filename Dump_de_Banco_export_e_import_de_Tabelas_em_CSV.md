@@ -22,7 +22,7 @@ cd pgsql_csv-export-upsert/
 ```
 ## Configurar arquivos de variáveis
 
-Configure o **banco atual** no arquivo para **exportar** e o nome do **banco novo** no arquivo para **importar**.  
+Configure o **BANCO ATUAL** no arquivo para **EXPORTAR** e o **BANCO NOVO** no arquivo para **IMPORTAR**.  
 >Preencha o restante das informações também.  
 
 ```
@@ -50,12 +50,12 @@ psql -l | cat
 createdb BancoNOVO
 ```
 
-## Exportar schema do Banco ANTIGO
+## Exportar Dump "somente esquema" do Banco ANTIGO para `.dmp.gz`
 
 ```bash
 ./Dump_export-schema-only.sh
 ```
-##  Importar Dump para o Banco NOVO
+##  Importar Dump para o "BANCO NOVO"
 
 ```bash
 ./Dump_import.sh Arquivo_Dump.dmp.gz
@@ -63,7 +63,7 @@ createdb BancoNOVO
 
 ## Tabelas
 
-Deve coonfigurar um arquivo com o nome tabelas.txt com uma lista de tabelas a esportar, um por linha.  
+Deve configurar um arquivo com o nome tabelas.txt com uma lista de tabelas a exportar. Uma tabela por linha.  
 Exemplo:  
 
 ```ini
