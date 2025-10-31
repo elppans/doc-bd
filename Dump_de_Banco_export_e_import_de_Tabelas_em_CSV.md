@@ -126,4 +126,5 @@ pg_dump --verbose --no-owner --no-acl --inserts -d BancoNOVO | gzip > "$HOME/Ban
 ```
 - Método 2:
 ```bash
+pg_dump --verbose --no-owner --no-acl -Fc BancoNOVO > "$HOME"/BancoNOVO_2.14.181.0_"$(date +%Y%m%d%H%M)".dump.backup
 ```
