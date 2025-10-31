@@ -75,6 +75,7 @@ tabela_2
 ## Completar tabelas dependentes
 
 Após configurar o arquivo tabelas.txt, execute este próximo Script para que seja verificado as tabelas dependentes e complete em uma nova lista.  
+>Se estiver usando o arquivo [tabelas_full_nozan.txt](https://github.com/elppans/sh-bd/blob/main/tabelas_full_nozan.txt), pode pular para o próximo item.  
 
 ```bash
 ./tabelas_ordenadas_completas.sh
@@ -119,6 +120,10 @@ VERSAO="$(psql -d BancoNOVO -c "select * from tab_controle_versao" | grep '2.14'
 
 Finalmente, o backup  
 
+- Método 1:
 ```bash
-pg_dump --verbose --no-owner --no-acl --inserts -d BancoNOVO | gzip > "$HOME/BancoNOVO_"$VERSAO"_"$(date +%d%m%y%H%M)".dmp.gz"
+pg_dump --verbose --no-owner --no-acl --inserts -d BancoNOVO | gzip > "$HOME/BancoNOVO_"$VERSAO"_"$(date +%Y%m%d%H%M)".dmp.gz"
+```
+- Método 2:
+```bash
 ```
