@@ -120,8 +120,9 @@ Então se der erro de comando não encotrado  para o `apt-key`, pule este comand
 ```bash
 wget --quiet -O - https://www.postgresql.org/media/keys/ACCC4CF8.asc | sudo apt-key add -
 ```
+>Ps.: A partir do Debian 13, não há mais o comando **`apt-key`**
 
-Se usando o apt-key não der certo, faça este comando `gpg`
+- **Importar a chave com o comando `gpg`**:
 
 ```bash
 curl https://www.postgresql.org/media/keys/ACCC4CF8.asc | gpg --dearmor | sudo tee /etc/apt/trusted.gpg.d/apt.postgresql.org.gpg >/dev/null
